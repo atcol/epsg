@@ -1,6 +1,6 @@
 [package]
 name = "epsg"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Alex Collins"]
 edition = "2018"
 homepage = "https://github.com/atcol/epsg"
@@ -8,13 +8,12 @@ keywords = ["epsg", "ogc", "geo", "crs", "coordinates"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/atcol/epsg"
-description = "EPSG Coordinate Reference System data"
+description = "EPSG Coordinate Reference System tools & data"
 
 [dependencies]
 phf = { version = "0.7.24", features = ["macros"] }
 postgres = {version = "0.17.4", features = ["with-time-0_2"] }
 handlebars = "3.2.1"
-# chrono = "0.4.13"
 serde_json = "1.0.56"
 serde = { version = "1.0.114", features = ["derive"] }
 time = "0.2.16"

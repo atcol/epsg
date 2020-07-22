@@ -4,6 +4,8 @@
 
 The Rust structures in this library are generated from the [EPSG Dataset](https://iogp.georepository.com/terms-of-use.html).
 
+See the [documentation](https://docs.rs/epsg/0.1.0/epsg/) for more information.
+
 ## Generating the Structures
 
 1. Download the dataset and extract the archive

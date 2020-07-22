@@ -1,9 +1,9 @@
 
 //!
-//! EPSG Coordinate Reference System data, as made available from epsg.org.
+//! Lookup tools for EPSG Coordinate Reference System data.
+//!
 //! See https://epsg.org/terms-of-use.html.
-//! 
-//! Lookup tools and reference data for common EPSG CRS.
+//! # Example 
 //! ```
 //! use epsg::references::get_crs;
 //! let wgs84 = get_crs("EPSG:4326").unwrap();
@@ -17,6 +17,7 @@
 //! assert_eq!(wgs84.data_source, "EPSG");
 //! ```
 use phf::{phf_map};
+/// A coordinate reference system
 pub struct CRS {
     pub coord_ref_sys_code: i32,
     pub coord_ref_sys_name: &'static str,
