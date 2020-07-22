@@ -4,9 +4,8 @@ version = "0.1.0"
 authors = ["Alex Collins"]
 edition = "2018"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+phf = { version = "0.7.24", features = ["macros"] }
 postgres = {version = "0.17.4", features = ["with-time-0_2"] }
 handlebars = "3.2.1"
 # chrono = "0.4.13"

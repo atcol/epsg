@@ -14,7 +14,10 @@ services:
       - 5432:5432
 
   adminer:
-    image: adminer
+    image: dpage/pgadmin4
     restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: root@localhost
+      PGADMIN_DEFAULT_PASSWORD: "postgres"
     ports:
-      - 8080:8080
+      - 80:80

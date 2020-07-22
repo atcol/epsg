@@ -1,3 +1,4 @@
+pub mod references;
 #[cfg(test)]
 mod tests {
     #[test]

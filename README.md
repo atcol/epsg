@@ -1,8 +1,10 @@
 # epsg
 
-Generate Rust structures from the [EPSG Dataset](https://iogp.georepository.com/terms-of-use.html).
+[EPSG](https://epsg.org/) reference data and common types for working with Coordinate Reference Systems.
 
-## Getting Started
+The Rust structures in this library are genreated from the [EPSG Dataset](https://iogp.georepository.com/terms-of-use.html).
+
+## Generating the Structures
 
 1. Download the dataset and extract the archive
 2. Clone this repository
