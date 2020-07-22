@@ -3,6 +3,11 @@ name = "epsg"
 version = "0.1.0"
 authors = ["Alex Collins"]
 edition = "2018"
+homepage = "https://github.com/atcol/epsg"
+keywords = ["epsg", "ogc", "geo", "crs", "coordinates"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/atcol/epsg"
 
 [dependencies]
 phf = { version = "0.7.24", features = ["macros"] }
