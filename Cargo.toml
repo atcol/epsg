@@ -8,6 +8,7 @@ keywords = ["epsg", "ogc", "geo", "crs", "coordinates"]
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/atcol/epsg"
+description = "EPSG Coordinate Reference System data"
 
 [dependencies]
 phf = { version = "0.7.24", features = ["macros"] }
