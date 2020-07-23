@@ -38,7 +38,10 @@ fn main() {
 //! assert_eq!(wgs84.data_source, \"EPSG\");
 //! ```
 use phf::{phf_map};
+use std::convert::TryFrom;
+
 /// A coordinate reference system
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct CRS {
     pub coord_ref_sys_code: i32,
     pub coord_ref_sys_name: &'static str,
@@ -51,6 +54,14 @@ pub struct CRS {
     pub data_source: &'static str,
     pub revision_date: &'static str,
     pub deprecated: i16,
+}
+
+impl TryFrom<String> for CRS {
+    type Error = &'static str;
+
+    fn try_from(value: String) -> Result< Self, Self::Error> {
+        get_crs(&value).map(|x| x.to_owned()).ok_or(\"No such CRS\")
+    }
 }
 
 static COORDINATE_REFS: phf::Map<&'static str, CRS> = phf_map! {
@@ -78,9 +89,19 @@ pub fn get_crs(code: &str) -> Option<&CRS> {
     COORDINATE_REFS.get(code)
 }
 
+/// Search for the name for the given crs Authority:Code combination
+/// e.g.
+/// ```
+/// use epsg::references::get_name;
+/// assert_eq!(get_name(\"EPSG:4326\"), Some(\"WGS 84\"));
+/// ```
+pub fn get_name(crs: &str) -> Option<&'static str> {
+    get_crs(&crs).map(|x| x.coord_ref_sys_name)
+}
+
 #[cfg(test)]
 mod tests {
-    use crate::references::get_crs;
+    use crate::references::{get_crs, get_name};
 
     #[test]
     fn test_lookup() {
