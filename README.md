@@ -10,12 +10,12 @@ See the [documentation](https://docs.rs/epsg/0.1.0/epsg/) for more information.
 
 1. Download the dataset and extract the archive
 2. Clone this repository
-3. Change the path in the volume in `docker-compose.yml` to point to this directory
+3. Change the path in the volume in `docker-compose.yml` to point to the directory holding the EPSG dataset
 4. Start the postgres container:
 ```
   docker-compose up
 ```
-5. Run this tool: `cargo run`.
+5. Run: `cargo run`.
 
 ## Contributions
 
