@@ -17,16 +17,7 @@
 //! assert_eq!(wgs84.data_source, "EPSG");
 //! ```
 use phf::{phf_map};
-use std::convert::TryFrom;
-use crate::
-
-impl TryFrom<String> for CRS {
-    type Error = &'static str;
-
-    fn try_from(value: String) -> Result< Self, Self::Error> {
-        get_crs(&value).map(|x| x.to_owned()).ok_or("No such CRS")
-    }
-}
+use crate::CRS;
 
 static COORDINATE_REFS: phf::Map<&'static str, CRS> = phf_map! {
     

@@ -1,7 +1,5 @@
-use epsg::CRS;
-use handlebars::Handlebars;
 use postgres::{Client, NoTls};
-use serde::{Deserialize, Serialize};
+use serde::{Serialize};
 use std::io::{stdout, Write};
 
 #[derive(Serialize)]
@@ -40,16 +38,7 @@ fn main() {
 //! assert_eq!(wgs84.data_source, \"EPSG\");
 //! ```
 use phf::{phf_map};
-use std::convert::TryFrom;
-use crate::
-
-impl TryFrom<String> for CRS {
-    type Error = &'static str;
-
-    fn try_from(value: String) -> Result< Self, Self::Error> {
-        get_crs(&value).map(|x| x.to_owned()).ok_or(\"No such CRS\")
-    }
-}
+use crate::CRS;
 
 static COORDINATE_REFS: phf::Map<&'static str, CRS> = phf_map! {
     ",
@@ -108,7 +97,7 @@ mod tests {
         NoTls,
     )
     .expect("Failed to connect to postgres");
-    let handlebars = Handlebars::new();
+    let handlebars = handlebars::Handlebars::new();
     let query = "
         SELECT coord_ref_sys_code, coord_ref_sys_name, coord_ref_sys_kind, coord_sys_code, datum_code, base_crs_code, remarks, information_source, data_source, revision_date, deprecated
         FROM epsg_coordinatereferencesystem; 
