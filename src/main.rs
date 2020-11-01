@@ -1,6 +1,7 @@
-use postgres::{Client, NoTls};
+use epsg::CRS;
 use handlebars::Handlebars;
-use serde::{Serialize};
+use postgres::{Client, NoTls};
+use serde::{Deserialize, Serialize};
 use std::io::{stdout, Write};
 
 #[derive(Serialize)]
@@ -19,7 +20,8 @@ struct Record {
 }
 
 fn main() {
-    let header: String = String::from("
+    let header: String = String::from(
+        "
 //!
 //! Lookup tools for EPSG Coordinate Reference System data.
 //!
@@ -39,22 +41,7 @@ fn main() {
 //! ```
 use phf::{phf_map};
 use std::convert::TryFrom;
-
-/// A coordinate reference system
-#[derive(Clone, Copy, Debug, PartialEq)]
-pub struct CRS {
-    pub coord_ref_sys_code: i32,
-    pub coord_ref_sys_name: &'static str,
-    pub coord_ref_sys_kind: &'static str,
-    pub coord_sys_code: i32,
-    pub datum_code: i32,
-    pub base_crs_code: i32,
-    pub remarks: &'static str,
-    pub information_source: &'static str,
-    pub data_source: &'static str,
-    pub revision_date: &'static str,
-    pub deprecated: i16,
-}
+use crate::
 
 impl TryFrom<String> for CRS {
     type Error = &'static str;
@@ -65,8 +52,10 @@ impl TryFrom<String> for CRS {
 }
 
 static COORDINATE_REFS: phf::Map<&'static str, CRS> = phf_map! {
-    ");
-    let template: String = String::from("
+    ",
+    );
+    let template: String = String::from(
+        "
         \"{{data_source}}:{{sys_code}}\" => CRS {
             coord_ref_sys_code: {{sys_code}},
             coord_ref_sys_name: \"{{sys_name}}\",
@@ -80,8 +69,10 @@ static COORDINATE_REFS: phf::Map<&'static str, CRS> = phf_map! {
             revision_date: \"{{revision_date}}\",
             deprecated: {{deprecated}}, 
         },
-    ");
-    let footer: String = String::from("
+    ",
+    );
+    let footer: String = String::from(
+        "
 }; // close phf_map 
 
 /// Find the specified CRS
@@ -109,9 +100,14 @@ mod tests {
         assert!(get_crs(\"blah\").is_none());
     }
 }
-    ");
+    ",
+    );
 
-    let mut client = Client::connect("host=localhost user=postgres password=postgres dbname=epsg", NoTls).expect("Failed to connect to postgres");
+    let mut client = Client::connect(
+        "host=localhost user=postgres password=postgres dbname=epsg",
+        NoTls,
+    )
+    .expect("Failed to connect to postgres");
     let handlebars = Handlebars::new();
     let query = "
         SELECT coord_ref_sys_code, coord_ref_sys_name, coord_ref_sys_kind, coord_sys_code, datum_code, base_crs_code, remarks, information_source, data_source, revision_date, deprecated
@@ -119,9 +115,9 @@ mod tests {
     ";
     print!("{}", header);
     for row in client.query(query, &[]).expect("Could not query") {
-	let sys_code: i32 = row.get(0);
-	let sys_name: &str = row.get(1);
-	let sys_kind: &str = row.get(2);
+        let sys_code: i32 = row.get(0);
+        let sys_name: &str = row.get(1);
+        let sys_kind: &str = row.get(2);
         let coord_sys_code: Option<i32> = row.get(3);
         let datum_code: Option<i32> = row.get(4);
         let base_crs_code: Option<i32> = row.get(5);
@@ -139,14 +135,16 @@ mod tests {
             datum_code: datum_code.unwrap_or(-1),
             base_crs_code: base_crs_code.unwrap_or(-1),
             remarks: remarks.map(|x| x.to_string()).unwrap_or("".to_string()),
-            information_source: information_source.map(|x| x.to_string()).unwrap_or("".to_string()),
+            information_source: information_source
+                .map(|x| x.to_string())
+                .unwrap_or("".to_string()),
             data_source: data_source.to_string(),
             revision_date: revision_date.to_string(),
             deprecated: deprecated,
         };
 
         print!("{}", handlebars.render_template(&template, &crs).unwrap());
-        stdout().flush();
+        stdout().flush().expect("Failed to flush stdout");
     }
     print!("{}", footer);
 }
