@@ -26,6 +26,8 @@
             cargo-geiger
             rust
             watchexec
+            openssl
+            docker-compose
           ];
         };
       }
