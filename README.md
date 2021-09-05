@@ -4,7 +4,9 @@
 
 The Rust structures in this library are generated from the [EPSG Dataset](https://iogp.georepository.com/terms-of-use.html).
 
-See the [documentation](https://docs.rs/epsg/0.1.0/epsg/) for more information.
+See the [documentation](https://docs.rs/epsg/latest/epsg/) for more information.
+
+![master build](https://github.com/atcol/epsg/actions/workflows/rust.yaml/badge.svg)
 
 ## Generating the Structures
 
@@ -15,7 +17,7 @@ See the [documentation](https://docs.rs/epsg/0.1.0/epsg/) for more information.
 ```
   docker-compose up
 ```
-5. Run: `cargo run`.
+5. Run: `export PG_STR="host=localhost user=postgres password=postgres dbname=epsg" cargo build --release`.
 
 ## Contributions
 
