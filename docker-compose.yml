@@ -3,21 +3,12 @@ version: '2.0'
 services:
 
   db:
-    image: postgres
+    image: postgres:9.6
     restart: always
     volumes:
-      - ./EPSG-v9_8_13-v10model-PostgreSQL:/docker-entrypoint-initdb.d/
+      - ./database:/docker-entrypoint-initdb.d/
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: "epsg"
     ports:
       - 5432:5432
-
-  adminer:
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: root@localhost
-      PGADMIN_DEFAULT_PASSWORD: "postgres"
-    ports:
-      - 80:80
