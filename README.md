@@ -6,7 +6,7 @@ The Rust structures in this library are generated from the [EPSG Dataset](https:
 
 See the [documentation](https://docs.rs/epsg/latest/epsg/) for more information.
 
-![master build](https://github.com/atcol/epsg/actions/workflows/rust.yml/badge.svg?branch=master)
+![master build](https://github.com/atcol/epsg/actions/workflows/master.yml/badge.svg?branch=master)
 
 ## Generating the Structures
 
