@@ -2,7 +2,7 @@
 
 [EPSG](https://epsg.org/) reference data and common types for working with Coordinate Reference Systems.
 
-The Rust structures in this library are generated from the [EPSG Dataset](https://iogp.georepository.com/terms-of-use.html).
+The Rust structures in this library are generated from the [EPSG Dataset](https://iogp.georepository.com/terms-of-use.html) version 10.033.
 
 See the [documentation](https://docs.rs/epsg/latest/epsg/) for more information.
 
