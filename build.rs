@@ -58,6 +58,7 @@ pub fn get_crs(code: &str) -> Option<&CRS> {
 }
 
 /// Search for the name for the given crs Authority:Code combination
+///
 /// e.g.
 /// ```
 /// use epsg::references::get_name;
