@@ -28,6 +28,7 @@
             watchexec
             openssl
             docker-compose
+            bacon
           ];
         };
       }

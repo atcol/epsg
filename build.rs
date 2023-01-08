@@ -1,7 +1,7 @@
 use postgres::{Client, NoTls};
 use serde::Serialize;
 use std::fs::{File, OpenOptions};
-use std::io::{Write};
+use std::io::Write;
 use std::{error::Error, path::Path};
 
 /// The header of the generated module
@@ -115,7 +115,8 @@ fn main() -> Result<(), Box<dyn Error>> {
         };
 
         let handlebars = handlebars::Handlebars::new();
-        f.write_all(format!("{}", HEADER).as_bytes()).expect("Could not write header");
+        f.write_all(format!("{}", HEADER).as_bytes())
+            .expect("Could not write header");
         for row in client.query(QUERY, &[]).expect("Could not query") {
             let sys_code: i32 = row.get(0);
             let sys_name: &str = row.get(1);
@@ -147,10 +148,12 @@ fn main() -> Result<(), Box<dyn Error>> {
 
             f.write_all(
                 format!("{}", handlebars.render_template(&TEMPLATE, &crs).unwrap()).as_bytes(),
-            ).expect("Could not write rendered template");
+            )
+            .expect("Could not write rendered template");
             f.flush().expect("Could not flush");
         }
-        f.write_all(format!("{}", FOOTER).as_bytes()).expect("Could not write footer");
+        f.write_all(format!("{}", FOOTER).as_bytes())
+            .expect("Could not write footer");
     }
     Ok(())
 }
