@@ -13,11 +13,15 @@ See the [documentation](https://docs.rs/epsg/latest/epsg/) for more information.
 ## Generating the Structures
 
 1. Download the dataset and extract the archive
+2. Prefix each file as follows:
+  - 1.PostgreSQL_Table_Script.sql
+  - 2.PostgreSQL_Data_Script.sql
+  - 3.PostgreSQL_FKey_Script.sql
 2. Clone this repository
 3. Change the path in the volume in `docker-compose.yml` to point to the directory holding the EPSG dataset
 4. Start the postgres container:
 ```
-  docker-compose up
+  docker-compose up -d
 ```
 5. Run: `export PG_STR="host=localhost user=postgres password=postgres dbname=epsg" cargo build --release`.
 
