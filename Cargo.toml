@@ -1,8 +1,8 @@
 [package]
 name = "epsg"
-version = "0.5.1"
+version = "0.11.1"
 authors = ["Alex Collins"]
-edition = "2018"
+edition = "2021"
 homepage = "https://github.com/atcol/epsg"
 keywords = ["epsg", "ogc", "geo", "crs", "coordinates"]
 license = "MIT"
@@ -12,17 +12,17 @@ description = "EPSG Coordinate Reference System tools & data"
 
 [dependencies]
 phf = { version = "0.11", features = ["macros"] }
-serde_json = "1.0.91"
-serde = { version = "1.0.152", features = ["derive"] }
+serde_json = "1.0.108"
+serde = { version = "1.0.193", features = ["derive"] }
 
 [dev-dependencies]
-criterion = "0.4.0"
+criterion = "0.5.1"
 
 [build-dependencies]
-reqwest = { version = "0.11.13", features = [ "blocking" ] }
-postgres = { version = "0.19.4", features = ["with-time-0_3"] }
-handlebars = "4.3.6"
-serde = { version = "1.0.152", features = ["derive"] }
+reqwest = { version = "0.11.22", features = [ "blocking" ] }
+postgres = { version = "0.19.7", features = ["with-time-0_3"] }
+handlebars = "4.5.0"
+serde = { version = "1.0.193", features = ["derive"] }
 # Stuck on version 2.0 'til postgres moves for time feature
 time = "0.3"
 

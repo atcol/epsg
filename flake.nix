@@ -1,36 +1,31 @@
 {
-  description = "EPSG Coordinate Reference System tools & data";
-
   inputs = {
-    nixpkgs.url      = "github:nixos/nixpkgs/nixos-unstable";
-    rust-overlay.url = "github:oxalica/rust-overlay";
-    flake-utils.url  = "github:numtide/flake-utils";
+    naersk.url = "github:nix-community/naersk/master";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, rust-overlay, flake-utils, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs = { self, nixpkgs, utils, naersk }:
+    utils.lib.eachDefaultSystem (system:
       let
-        overlays = [ (import rust-overlay) ];
-        pkgs = import nixpkgs {
-          inherit system overlays;
-        };
-        rust = pkgs.rust-bin.stable.latest.default.override {
-        };
+        pkgs = import nixpkgs { inherit system; };
+        naersk-lib = pkgs.callPackage naersk { };
       in
-      with pkgs;
       {
-        devShell = mkShell {
-          buildInputs = [
-            pkgconfig
-            cargo-generate
-            cargo-geiger
-            rust
-            watchexec
+        deployment.targetHost = "soz.fish";
+        defaultPackage = naersk-lib.buildPackage ./.;
+        devShell = with pkgs; mkShell {
+          buildInputs = [ cargo
+            rustc 
+            rustfmt
+            pre-commit
+            rustPackages.clippy
+            pkg-config
             openssl
-            docker-compose
             bacon
+            sqlite
           ];
+          RUST_SRC_PATH = rustPlatform.rustLibSrc;
         };
-      }
-    );
+      });
 }

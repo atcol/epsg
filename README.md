@@ -23,7 +23,7 @@ See the [documentation](https://docs.rs/epsg/latest/epsg/) for more information.
 ```
   docker-compose up -d
 ```
-5. Run: `export PG_STR="host=localhost user=postgres password=postgres dbname=epsg" cargo build --release`.
+5. Run: `PG_STR="host=localhost user=postgres password=postgres dbname=epsg" cargo build --release`.
 
 ## Contributions
 
