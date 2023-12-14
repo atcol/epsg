@@ -1,6 +1,6 @@
 [package]
 name = "epsg"
-version = "11.1.1"
+version = "11.1.2"
 authors = ["Alex Collins"]
 edition = "2021"
 homepage = "https://github.com/atcol/epsg"
@@ -23,7 +23,6 @@ reqwest = { version = "0.11.22", features = [ "blocking" ] }
 postgres = { version = "0.19.7", features = ["with-time-0_3"] }
 handlebars = "4.5.0"
 serde = { version = "1.0.193", features = ["derive"] }
-# Stuck on version 2.0 'til postgres moves for time feature
 time = "0.3"
 
 [[bench]]

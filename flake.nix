@@ -24,6 +24,7 @@
             openssl
             bacon
             sqlite
+            postgresql
           ];
           RUST_SRC_PATH = rustPlatform.rustLibSrc;
         };
